@@ -4,6 +4,13 @@ import {
 } from '@nestjs/platform-fastify';
 import { VersioningType, VERSION_NEUTRAL } from '@nestjs/common';
 
+// 拦截器
+import { TransformInterceptor } from './common/interceptors/transform.interceptor';
+
+// 异常处理
+import { AllExceptionsFilter } from './common/exceptions/base.exception.filter';
+import { HttpExceptionFilter } from './common/exceptions/http.exception.filter';
+
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
@@ -17,8 +24,14 @@ async function bootstrap() {
   // 增加请求版本控制
   app.enableVersioning({
     type: VersioningType.URI,
-    defaultVersion: '1',
+    defaultVersion: [VERSION_NEUTRAL, '1', '2'],
   });
+
+  // 增加全局拦截器
+  app.useGlobalInterceptors(new TransformInterceptor());
+
+  // 增加全局异常处理
+  app.useGlobalFilters(new AllExceptionsFilter(), new HttpExceptionFilter());
 
   // 开始监听端口
   await app.listen(5000);
