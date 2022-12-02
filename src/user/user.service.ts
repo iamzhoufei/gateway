@@ -12,6 +12,10 @@ export class UserService {
     return `This action returns all user`;
   }
 
+  findAll2() {
+    return `This action returns all 2 user`;
+  }
+
   findOne(id: number) {
     return `This action returns a #${id} user`;
   }

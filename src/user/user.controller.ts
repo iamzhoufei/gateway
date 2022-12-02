@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   Version,
+  VERSION_NEUTRAL,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -21,8 +22,16 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   // 移除 findAll 方法的 Get 装饰器，使之成为 user controller 的默认路由
+  @Get()
+  @Version([VERSION_NEUTRAL, '1'])
   findAll() {
     return this.userService.findAll();
+  }
+
+  @Get()
+  @Version('2')
+  findAll2() {
+    return this.userService.findAll2();
   }
 
   @Post()

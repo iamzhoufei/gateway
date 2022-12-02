@@ -2,7 +2,7 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
-import { VersioningType } from '@nestjs/common';
+import { VersioningType, VERSION_NEUTRAL } from '@nestjs/common';
 
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
