@@ -9,6 +9,8 @@ import {
   Version,
   VERSION_NEUTRAL,
 } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -20,13 +22,22 @@ import { BusinessException } from 'src/common/exceptions/business.exception';
   version: '1',
 })
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly configService: ConfigService,
+  ) {}
 
   // 移除 findAll 方法的 Get 装饰器，使之成为 user controller 的默认路由
   @Get()
   @Version([VERSION_NEUTRAL, '1'])
   findAll() {
     return this.userService.findAll();
+  }
+
+  @Get('getTestName')
+  @Version([VERSION_NEUTRAL, '1'])
+  getTestName() {
+    return this.configService.get('TEST_VALUE').name;
   }
 
   @Get('findError')
