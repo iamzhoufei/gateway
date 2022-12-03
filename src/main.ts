@@ -14,6 +14,10 @@ import { HttpExceptionFilter } from './common/exceptions/http.exception.filter';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
+import { generateDocument } from './doc';
+
+// declare const module: any;
+
 async function bootstrap() {
   // 使用 fastify 作为底层框架
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -32,6 +36,15 @@ async function bootstrap() {
 
   // 增加全局异常处理
   app.useGlobalFilters(new AllExceptionsFilter(), new HttpExceptionFilter());
+
+  // 创建文档
+  generateDocument(app);
+
+  // 添加热更新
+  // if (module.hot) {
+  //   module.hot.accept();
+  //   module.hot.dispose(() => app.close());
+  // }
 
   // 开始监听端口
   await app.listen(5000);
