@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, CacheModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -11,6 +11,9 @@ import { UserModule } from './user/user.module';
 // 并将结果存储到一个可以通过 ConfigService 访问的私有结构
 @Module({
   imports: [
+    CacheModule.register({
+      isGlobal: true,
+    }),
     ConfigModule.forRoot({
       ignoreEnvFile: true,
       isGlobal: true,

@@ -2,7 +2,11 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
-import { VersioningType, VERSION_NEUTRAL } from '@nestjs/common';
+import {
+  ValidationPipe,
+  VersioningType,
+  VERSION_NEUTRAL,
+} from '@nestjs/common';
 
 // 拦截器
 import { TransformInterceptor } from './common/interceptors/transform.interceptor';
@@ -36,6 +40,9 @@ async function bootstrap() {
 
   // 增加全局异常处理
   app.useGlobalFilters(new AllExceptionsFilter(), new HttpExceptionFilter());
+
+  // 启动全局字段校验，保证请求接口字段校验正确
+  app.useGlobalPipes(new ValidationPipe());
 
   // 创建文档
   generateDocument(app);
