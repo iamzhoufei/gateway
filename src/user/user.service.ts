@@ -11,4 +11,7 @@ export class UserService {
   createOrSave(user: User) {
     return this.userRepository.save(user);
   }
+  findAll() {
+    return this.userRepository.find();
+  }
 }

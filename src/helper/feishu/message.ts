@@ -1,4 +1,4 @@
-import { methodWithVersion } from 'src/utils/request';
+import { methodWithVersion } from '@/utils/request';
 
 export enum RECEIVE_TYPE {
   'open_id',

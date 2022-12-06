@@ -8,6 +8,8 @@ import {
   VERSION_NEUTRAL,
 } from '@nestjs/common';
 
+// import split = require('split2');
+
 // 拦截器
 import { TransformInterceptor } from './common/interceptors/transform.interceptor';
 
@@ -20,13 +22,22 @@ import { AppModule } from './app.module';
 
 import { generateDocument } from './doc';
 
+import { FastifyLogger } from '@/common/logger';
+import fastify from 'fastify';
+
 // declare const module: any;
 
 async function bootstrap() {
+  // const stream = split(JSON.parse);
+
+  const fastifyInstance = fastify({
+    logger: FastifyLogger,
+  });
+
   // 使用 fastify 作为底层框架
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
-    new FastifyAdapter(),
+    new FastifyAdapter(fastifyInstance as any),
   );
 
   // 增加请求版本控制

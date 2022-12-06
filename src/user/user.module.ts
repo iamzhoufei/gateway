@@ -8,7 +8,7 @@ import { FeishuController } from './feishu/feishu.controller';
 
 import { RedisCacheService } from '@/common/cache/redis-cache.service';
 
-import { DatabaseModule } from 'src/common/database/database.module';
+import { DatabaseModule } from '@/common/database/database.module';
 
 @Module({
   imports: [DatabaseModule],

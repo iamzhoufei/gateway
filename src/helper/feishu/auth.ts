@@ -1,5 +1,5 @@
 import { APP_ID, APP_SECRET } from './const';
-import { methodWithVersion } from 'src/utils/request';
+import { methodWithVersion } from '@/utils/request';
 
 export type GetTokenRes = {
   code: number;

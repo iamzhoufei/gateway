@@ -8,10 +8,10 @@ import {
   // getUserAccessToken,
   // getUserToken,
   // refreshUserToken,
-} from 'src/helper/feishu/auth';
+} from '@/helper/feishu/auth';
 import { Cache } from 'cache-manager';
-import { BusinessException } from 'src/common/exceptions/business.exception';
-import { messages } from 'src/helper/feishu/message';
+import { BusinessException } from '@/common/exceptions/business.exception';
+import { messages } from '@/helper/feishu/message';
 
 @Injectable()
 export class FeishuService {
