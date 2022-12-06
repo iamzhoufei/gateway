@@ -1,5 +1,8 @@
+import { RedisCacheModule } from './common/cache/redis-cache.module';
 import { Module, CacheModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import * as redisStore from 'cache-manager-redis-store';
+
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -11,9 +14,24 @@ import { UserModule } from './user/user.module';
 // 并将结果存储到一个可以通过 ConfigService 访问的私有结构
 @Module({
   imports: [
-    CacheModule.register({
-      isGlobal: true,
-    }),
+    RedisCacheModule,
+    // CacheModule.registerAsync({
+    //   isGlobal: true,
+    //   useFactory: async () => {
+    //     return {
+    //       store: redisStore as any,
+    //       host: getConfig('REDIS_CONFIG').host,
+    //       port: getConfig('REDIS_CONFIG').port,
+    //       db: getConfig('REDIS_CONFIG').db, //目标库,
+    //       auth_pass: getConfig('REDIS_CONFIG').auth, // 密码,没有可以不写
+    //     };
+    //   },
+    //   // store: redisStore as any,
+    //   // host: getConfig('REDIS_CONFIG').host,
+    //   // port: getConfig('REDIS_CONFIG').port,
+    //   // auth_pass: getConfig('REDIS_CONFIG').auth,
+    //   // // db: getConfig('REDIS_CONFIG').db,
+    // }),
     ConfigModule.forRoot({
       ignoreEnvFile: true,
       isGlobal: true,
@@ -21,7 +39,7 @@ import { UserModule } from './user/user.module';
     }),
     UserModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

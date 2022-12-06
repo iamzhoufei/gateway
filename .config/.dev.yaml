@@ -11,6 +11,12 @@ FEISHU_TOKEN_CACHE:
   APP_TOKEN_CACHE_KEY: APP_TOKEN_CACHE_KEY
   TENANT_TOKEN_CACHE_KEY: TENANT_TOKEN_CACHE_KEY
 
+REDIS_CONFIG:
+  host: "localhost"  # redis 链接
+  port: 6379         # redis 端口
+  auth: ""       # redis 连接密码
+  db: "0"           # redis 数据库
+
 MONGODB_CONFIG:
   name: "fast_gateway_test"          # 自定义次数据库链接名称
   type: mongodb                      # 数据库链接类型
